@@ -32,9 +32,10 @@ const SignIn = () => {
   const onSubmit = (data) => {
     axios
       .post("https://kenziehub.me/sessions", data)
-      .then(() => {
-        toast.success("Bem-vindx ao Kenzie Hub!");
-        history.push("/dashboard");
+      .then((response) => {
+        localStorage.setItem("@kenziehub:token", response.data.token);
+        history.push(`/dashboard/${response.data.user.id}`);
+        toast.success("Bem-vindx ao Kenzie Hub!", { duration: 1000 });
       })
       .catch(() => toast.error("Ops, algo de errado aconteceu"));
   };

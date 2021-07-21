@@ -40,6 +40,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -48,6 +49,7 @@ const SignUp = () => {
     axios
       .post("https://kenziehub.me/users", data)
       .then(() => {
+        reset();
         toast.success("Bem-vindx ao Kenzie Hub!");
         history.push("/dashboard");
       })
