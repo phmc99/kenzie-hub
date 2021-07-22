@@ -38,7 +38,12 @@ export const GlobalStyle = createGlobalStyle`
     padding: 8px;
     height: 50px;
     border-radius: 10px;
+    outline: none;
+  }
 
+  select {
+    outline: none;
+    padding: 8px;
   }
 
   button {
@@ -50,6 +55,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 24px;
     border-radius: 10px;
     width: 180px;
+    outline: none;
+
 
     &:hover {
     transition: all 0.2s;

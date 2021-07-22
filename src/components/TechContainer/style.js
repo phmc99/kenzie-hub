@@ -28,6 +28,13 @@ export const TechBox = styled.div`
 
     ul {
       justify-content: flex-start;
+      li {
+        &:hover {
+          transform: scale(105%);
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+      }
     }
   }
 `;

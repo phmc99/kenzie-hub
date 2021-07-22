@@ -1,32 +1,26 @@
-import React from "react";
 import { TechIcon } from "../TechIcon/TechIcon";
 import { TechBox } from "./style";
 
-const TechContainer = ({ title, techs }) => {
+const TechContainer = ({ title, techs, openTechOptionModal }) => {
   return (
-    <TechBox>
-      <span>{title}</span>
-      <ul>
-        <li>
-          <TechIcon tech="c" />
-        </li>
-        <li>
-          <TechIcon tech="reactjs" />
-        </li>
-        <li>
-          <TechIcon tech="python" />
-        </li>
-        <li>
-          <TechIcon tech="node" />
-        </li>
-        <li>
-          <TechIcon tech="django" />
-        </li>
-        <li>
-          <TechIcon tech="flask" />
-        </li>
-      </ul>
-    </TechBox>
+    <>
+      <TechBox>
+        <span>{title}</span>
+        <ul>
+          {techs &&
+            techs.map((item, index) => (
+              <li key={index}>
+                <TechIcon
+                  tech={item.title}
+                  data-title={item.title}
+                  data-id={item.id}
+                  onClick={(event) => openTechOptionModal(event.target.dataset)}
+                />
+              </li>
+            ))}
+        </ul>
+      </TechBox>
+    </>
   );
 };
 

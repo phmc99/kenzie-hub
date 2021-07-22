@@ -20,20 +20,20 @@ export const TechModalBox = styled.div`
       align-items: center;
 
       .my-techs {
-        width: 100%;
-        margin-top: 10px;
-        ul {
-          li {
-            margin: 5px 0;
-            display: flex;
-            align-items: center;
-          }
-        }
+        margin: 10px 0;
+        display: flex;
+        gap: 20px;
+        align-items: center;
       }
 
       button {
         margin-top: 10px;
         background-color: var(--orange-aux);
+
+        &:disabled {
+          filter: brightness(0.55);
+          cursor: not-allowed;
+        }
       }
     }
   }

@@ -51,7 +51,7 @@ const SignUp = () => {
       .then(() => {
         reset();
         toast.success("Bem-vindx ao Kenzie Hub!");
-        history.push("/dashboard");
+        history.push("/login");
       })
       .catch(() => toast.error("Ops, algo de errado aconteceu"));
   };

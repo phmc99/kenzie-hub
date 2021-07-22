@@ -14,29 +14,66 @@ import profileImg from "../../assets/profile.png";
 import toast from "react-hot-toast";
 import TechModal from "../../components/TechModal";
 import InfoModal from "../../components/InfoModal";
+import TechOptions from "../../components/TechOptions";
 
 const Dashboard = () => {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
+
   const [techModalToggle, setTechModalToggle] = useState(false);
   const [infoModalToggle, setInfoModalToggle] = useState(false);
+  const [techOptionModalToggle, setTechOptionModalToggle] = useState(false);
+
+  const [userTechs, setUserTechs] = useState([]);
+  const [updateTechs, setUpdateTechs] = useState([]);
+  const [selectedTech, setSelectedTech] = useState({});
 
   useEffect(() => {
     axios
       .get(`https://kenziehub.me/users/${id}`)
       .then((response) => {
         setUserData(response.data);
+        setUserTechs(response.data.techs);
       })
       .catch(() => toast.error("Ops, algo de errado aconteceu"));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`https://kenziehub.me/users/${id}`)
+      .then((response) => {
+        setUpdateTechs(response.data.techs);
+      })
+      .catch(() => toast.error("Ops, algo de errado aconteceu"));
+  }, [userTechs]);
+
   const openTechModal = () => setTechModalToggle(true);
   const openInfoModal = () => setInfoModalToggle(true);
+  const openTechOptionModal = (value) => {
+    setTechOptionModalToggle(true);
+    setSelectedTech(value);
+  };
 
   return (
     <>
-      {techModalToggle && <TechModal setTechModalToggle={setTechModalToggle} />}
+      {techModalToggle && (
+        <TechModal
+          setTechModalToggle={setTechModalToggle}
+          setUserTechs={setUserTechs}
+          userTechs={userTechs}
+        />
+      )}
       {infoModalToggle && <InfoModal setInfoModalToggle={setInfoModalToggle} />}
+      {techOptionModalToggle && (
+        <TechOptions
+          title={selectedTech.title}
+          id={selectedTech.id}
+          status={selectedTech.status}
+          updateTechs={updateTechs}
+          setUserTechs={setUserTechs}
+          setTechOptionModalToggle={setTechOptionModalToggle}
+        />
+      )}
 
       <MainContent>
         <section className="cover"></section>
@@ -77,11 +114,19 @@ const Dashboard = () => {
               <div className="techs-box">
                 <TechContainer
                   title="Estou aprendendo"
-                  techs={userData.techs}
+                  techs={
+                    updateTechs &&
+                    updateTechs.filter((item) => item.status === "Iniciante")
+                  }
+                  openTechOptionModal={openTechOptionModal}
                 />
                 <TechContainer
                   title="Tenho experiência"
-                  techs={userData.techs}
+                  techs={
+                    updateTechs &&
+                    updateTechs.filter((item) => item.status === "Avançado")
+                  }
+                  openTechOptionModal={openTechOptionModal}
                 />
               </div>
             </InfoBox>
