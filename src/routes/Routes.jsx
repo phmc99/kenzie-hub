@@ -20,10 +20,10 @@ const Routes = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route path="/register">
+      <Route path="/login">
         <SignIn />
       </Route>
-      <Route path="/login">
+      <Route path="/register">
         <SignUp />
       </Route>
       {isLogged ? (

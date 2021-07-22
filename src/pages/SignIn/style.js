@@ -52,7 +52,7 @@ export const InputBox = styled.div`
   }
 
   @media (min-width: 800px) {
-    height: 380px;
+    height: 80px;
   }
 `;
 
