@@ -42,6 +42,7 @@ const TechInputSelect = ({ setNewTech }) => {
   useEffect(() => {
     let userSearch = validTechs.filter((item) => item.includes(userInput));
     setFilteredTechs(userSearch);
+    // eslint-disable-next-line
   }, [userInput]);
 
   const addTech = (value) => {

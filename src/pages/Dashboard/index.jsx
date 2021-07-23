@@ -38,6 +38,7 @@ const Dashboard = () => {
         setUserTechs(response.data.techs);
       })
       .catch(() => toast.error("Ops, algo de errado aconteceu"));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const Dashboard = () => {
         setUpdateTechs(response.data.techs);
       })
       .catch(() => toast.error("Ops, algo de errado aconteceu"));
+    // eslint-disable-next-line
   }, [userTechs]);
 
   const openTechModal = () => setTechModalToggle(true);
