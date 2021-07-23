@@ -8,11 +8,11 @@ export const ModalBackground = styled.div`
   z-index: 1;
 
   .modal-main {
-    overflow: scroll;
+    border-radius: 5px;
+    overflow: hidden;
 
     padding: 10px;
     width: 300px;
-    height: 420px;
     background-color: var(--black-pastel);
 
     position: fixed;
@@ -33,17 +33,26 @@ export const ModalBackground = styled.div`
         color: var(--white-pastel);
         font-size: 24px;
       }
-      button {
-        background-color: transparent;
-        width: 40px;
+      span {
+        color: var(--pink-pastel);
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 20px;
       }
+    }
+
+    .content {
+      min-height: 120px;
+      max-height: 480px;
     }
   }
 
   @media (min-width: 800px) {
     .modal-main {
-      width: 600px;
-      height: 480px;
+      min-width: 360px;
+      min-height: 220px;
     }
   }
 `;

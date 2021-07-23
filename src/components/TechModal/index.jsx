@@ -4,6 +4,7 @@ import { TechModalBox } from "./style";
 import { useState } from "react";
 import TechInputSelect from "../TechInputSelect";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const TechModal = ({ setTechModalToggle, setUserTechs, userTechs }) => {
   const [newTech, setNewTech] = useState("");
@@ -22,10 +23,13 @@ const TechModal = ({ setTechModalToggle, setUserTechs, userTechs }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
+      .then(() => {
         setUserTechs(newTech);
+        toast.success("Tecnologia adicionada");
       })
-      .catch((err) => console.log(err));
+      .catch(() =>
+        toast.error("Essa tecnologia já foi adicionada", { duration: 2000 })
+      );
 
     setTechModalToggle(false);
   };

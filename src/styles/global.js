@@ -17,10 +17,12 @@ export const GlobalStyle = createGlobalStyle`
 
     box-sizing: border-box;
 
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Heebo', sans-serif;
     
     list-style: none;
+
+    
   }
 
   body {
@@ -43,7 +45,10 @@ export const GlobalStyle = createGlobalStyle`
 
   select {
     outline: none;
+    border-radius: 5px;
+    border: 0;
     padding: 8px;
+    background-color: var(--white-pastel);
   }
 
   button {

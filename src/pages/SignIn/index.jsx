@@ -36,7 +36,9 @@ const SignIn = () => {
         localStorage.setItem("@kenziehub:token", response.data.token);
         localStorage.setItem("@kenziehub:id", response.data.user.id);
         history.push(`/dashboard/${response.data.user.id}`);
-        toast.success("Bem-vindx ao Kenzie Hub!", { duration: 1000 });
+        toast.success(`Bem-vindx de volta ${response.data.user.name}`, {
+          duration: 2000,
+        });
       })
       .catch(() => toast.error("Ops, algo de errado aconteceu"));
   };

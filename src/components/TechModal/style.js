@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const TechModalBox = styled.div`
   width: 100%;
-  height: 300px;
+  height: 200px;
+  max-height: 220px;
 
   h2 {
     color: var(--white-pastel);
@@ -29,6 +30,9 @@ export const TechModalBox = styled.div`
       button {
         margin-top: 10px;
         background-color: var(--orange-aux);
+        width: 100px;
+        height: 45px;
+        font-size: 20px;
 
         &:disabled {
           filter: brightness(0.55);

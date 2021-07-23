@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const TechBox = styled.div`
-  width: 50%;
+  width: 45%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: scroll;
   max-height: 90px;
+  border-radius: 10px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   span {
-    color: var(--white-pastel);
+    color: gray;
     margin: 5px 0;
     text-align: center;
   }
@@ -30,9 +35,8 @@ export const TechBox = styled.div`
       justify-content: flex-start;
       li {
         &:hover {
-          transform: scale(105%);
           cursor: pointer;
-          transition: all 0.2s;
+          filter: brightness(1.15);
         }
       }
     }

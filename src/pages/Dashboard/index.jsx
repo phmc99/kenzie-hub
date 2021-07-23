@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { InfoBox } from "../../components/InfoBox/InfoBox";
 import TechContainer from "../../components/TechContainer";
 import { MainContent } from "./style";
 
-import { HiPencilAlt } from "react-icons/hi";
+import { HiLogout, HiPencilAlt } from "react-icons/hi";
 
 import profileImg from "../../assets/profile.png";
 
@@ -18,6 +18,8 @@ import TechOptions from "../../components/TechOptions";
 
 const Dashboard = () => {
   const { id } = useParams();
+  const history = useHistory();
+
   const [userData, setUserData] = useState({});
 
   const [techModalToggle, setTechModalToggle] = useState(false);
@@ -54,6 +56,14 @@ const Dashboard = () => {
     setSelectedTech(value);
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    history.push("/");
+    toast(`Volte sempre ${userData.name}`, {
+      icon: "👋",
+    });
+  };
+
   return (
     <>
       {techModalToggle && (
@@ -63,7 +73,12 @@ const Dashboard = () => {
           userTechs={userTechs}
         />
       )}
-      {infoModalToggle && <InfoModal setInfoModalToggle={setInfoModalToggle} />}
+      {infoModalToggle && (
+        <InfoModal
+          userData={userData}
+          setInfoModalToggle={setInfoModalToggle}
+        />
+      )}
       {techOptionModalToggle && (
         <TechOptions
           title={selectedTech.title}
@@ -76,7 +91,11 @@ const Dashboard = () => {
       )}
 
       <MainContent>
-        <section className="cover"></section>
+        <section className="cover">
+          <button onClick={handleLogout}>
+            Logout <HiLogout />
+          </button>
+        </section>
         <section className="content">
           <div className="box-avatar">
             <div className="avatar-circle">
@@ -90,18 +109,22 @@ const Dashboard = () => {
               />
             </div>
             <h1>{userData.name}</h1>
+            <span>Modulo: {userData["course_module"]}</span>
           </div>
 
           <div className="column">
             <InfoBox>
               <div className="title">
                 <h2>Sobre mim</h2>
-                <button onClick={openInfoModal}>
+                <button disabled onClick={openInfoModal}>
                   <HiPencilAlt />
                 </button>
               </div>
 
               <p>{userData.bio}</p>
+              <span>
+                <b>Contato</b> - {userData.contact}
+              </span>
             </InfoBox>
 
             <InfoBox>

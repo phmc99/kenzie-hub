@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { InputBox, ResultBox } from "./style";
+import { HiChevronDown } from "react-icons/hi";
 
-const TechInputSelect = ({ userTechs, newTech, setNewTech }) => {
+const TechInputSelect = ({ setNewTech }) => {
   const validTechs = [
     "reactjs",
     "python",
@@ -22,51 +23,61 @@ const TechInputSelect = ({ userTechs, newTech, setNewTech }) => {
     "javascript",
     "swift",
     "ruby",
+    "vuejs",
+    "nextjs",
+    "css3",
+    "html5",
+    "docker",
+    "mongodb",
+    "mysql",
+    "typescript",
+    "jquery",
+    "jest",
   ];
 
   const [toggle, setToggle] = useState(false);
   const [filteredTechs, setFilteredTechs] = useState([]);
   const [userInput, setUserInput] = useState("");
 
-  // const userCurrentTechs = userTechs.map((item) => item.title);
-
   useEffect(() => {
     let userSearch = validTechs.filter((item) => item.includes(userInput));
-    // setFilteredTechs(
-    //   userSearch.filter((item) => !userCurrentTechs.includes(item))
-    // );
     setFilteredTechs(userSearch);
   }, [userInput]);
 
   const addTech = (value) => {
-    if (newTech.trim() === "") {
-      setNewTech(value);
-    } else {
-      alert("Já escolheu tech");
-    }
+    setNewTech(value);
     setUserInput("");
     setToggle(!toggle);
   };
 
   return (
     <InputBox>
-      <input
-        onClick={() => setToggle(!toggle)}
-        onChange={(event) => setUserInput(event.target.value)}
-        value={userInput}
-        type="text"
-        placeholder="Busque uma tecnologia"
-      />
+      <div className="input-content">
+        <input
+          onClick={() => setToggle(!toggle)}
+          onChange={(event) => {
+            setUserInput(event.target.value);
+          }}
+          value={userInput}
+          type="text"
+          placeholder="Busque uma tecnologia"
+        />
+        <HiChevronDown onClick={() => setToggle(!toggle)} />
+      </div>
       {toggle && (
         <ResultBox>
           {filteredTechs.length > 0 ? (
-            filteredTechs.map((item) => (
-              <div onClick={() => addTech(item)} className="tech-item">
+            filteredTechs.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => addTech(item)}
+                className="tech-item"
+              >
                 {item}
               </div>
             ))
           ) : (
-            <span>Digite alguma tech</span>
+            <span>Tecnologia invalida</span>
           )}
         </ResultBox>
       )}

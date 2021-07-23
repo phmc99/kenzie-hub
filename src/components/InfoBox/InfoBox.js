@@ -32,6 +32,12 @@ export const InfoBox = styled.div`
           fill: var(--orange-aux);
         }
       }
+
+      &:disabled {
+        color: gray;
+        filter: brightness(0.5);
+        background-color: transparent;
+      }
     }
   }
 
@@ -41,7 +47,7 @@ export const InfoBox = styled.div`
 
   .techs-box {
     display: flex;
-    gap: 10px;
+    justify-content: space-around;
   }
 
   @media (min-width: 800px) {

@@ -14,6 +14,7 @@ const TechContainer = ({ title, techs, openTechOptionModal }) => {
                   tech={item.title}
                   data-title={item.title}
                   data-id={item.id}
+                  data-status={item.status}
                   onClick={(event) => openTechOptionModal(event.target.dataset)}
                 />
               </li>

@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Modal from "../Modal";
 import { TechIcon } from "../TechIcon/TechIcon";
 import { TechOtionsContent } from "./style";
+
+import { HiTrash } from "react-icons/hi";
 
 const TechOptions = ({
   title,
@@ -26,6 +29,9 @@ const TechOptions = ({
         setUserTechs(updateTechs.find((item) => item.id === id));
       });
     setTechOptionModalToggle(false);
+    toast(`Tecnologia ${title} deletada`, {
+      icon: "🗑",
+    });
   };
 
   const handleUpdateTech = () => {
@@ -48,7 +54,11 @@ const TechOptions = ({
             return item;
           })
         );
-      });
+        toast(`Tecnologia ${title} atualizada`, {
+          icon: "🔃",
+        });
+      })
+      .catch(() => toast.error("Altere o status da tecnologia"));
 
     setTechOptionModalToggle(false);
   };
@@ -59,16 +69,19 @@ const TechOptions = ({
         <div className="icon-select">
           <TechIcon tech={title} />
           <select onChange={(event) => setTechStatus(event.target.value)}>
+            <option value="Selecione" disabled selected>
+              Seleciona o status
+            </option>
             <option value="Iniciante">Estou aprendendo</option>
             <option value="Avançado">Tenho experiência</option>
           </select>
         </div>
         <div className="button-container">
+          <span className="delete" onClick={handleDeleteTech}>
+            <HiTrash />
+          </span>
           <button className="update" onClick={handleUpdateTech}>
             Atualizar status
-          </button>
-          <button className="delete" onClick={handleDeleteTech}>
-            Deletar
           </button>
         </div>
       </TechOtionsContent>
