@@ -1,19 +1,18 @@
-import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import axios from "axios";
-
-import toast from "react-hot-toast";
 
 import AsideImg from "../../components/AsideImage";
 import { FormBox } from "../../components/FormBox/style";
 import { MainContent, InputBox, ButtonContent } from "./style";
+import { SignIn } from "../../types";
+import { useAuth } from "../../providers/auth";
 
-const SignIn = () => {
+const SignInPage = () => {
+  const { handleLogin } = useAuth();
+
   const history = useHistory();
 
   const formSchema = yup.object().shape({
@@ -25,22 +24,17 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<SignIn>({
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit = (data) => {
-    axios
-      .post("https://kenziehub.me/sessions", data)
-      .then((response) => {
-        localStorage.setItem("@kenziehub:token", response.data.token);
-        localStorage.setItem("@kenziehub:id", response.data.user.id);
-        history.push(`/dashboard/${response.data.user.id}`);
-        toast.success(`Bem-vindx de volta ${response.data.user.name}`, {
-          duration: 2000,
-        });
-      })
-      .catch(() => toast.error("Ops, algo de errado aconteceu"));
+  const onSubmit: SubmitHandler<SignIn> = async (data) => {
+    await handleLogin(data);
+    const userId = localStorage.getItem("@kenziehub:id");
+
+    if (userId !== null) {
+      history.push(`/dashboard/${userId}`);
+    }
   };
 
   return (
@@ -88,4 +82,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;

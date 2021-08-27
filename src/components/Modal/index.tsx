@@ -1,7 +1,14 @@
 import { ModalBackground } from "./style";
 import { HiX } from "react-icons/hi";
+import { ReactNode } from "react";
 
-const Modal = ({ title, setModalToggle, children }) => {
+interface ModalProps {
+  title: string;
+  setModalToggle: (toggle: boolean) => void;
+  children: ReactNode;
+}
+
+const Modal = ({ title, setModalToggle, children }: ModalProps) => {
   const closeModal = () => setModalToggle(false);
 
   return (

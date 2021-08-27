@@ -1,51 +1,23 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { InputBox, ResultBox } from "./style";
 import { HiChevronDown } from "react-icons/hi";
+import { validTechs } from "../../services/validTechs";
 
-const TechInputSelect = ({ setNewTech }) => {
-  const validTechs = [
-    "reactjs",
-    "python",
-    "node",
-    "angularjs",
-    "laravel",
-    "django",
-    "flutter",
-    "dart",
-    "php",
-    "flask",
-    "react-native",
-    "kotlin",
-    "java",
-    "c",
-    "go",
-    "javascript",
-    "swift",
-    "ruby",
-    "vuejs",
-    "nextjs",
-    "css3",
-    "html5",
-    "docker",
-    "mongodb",
-    "mysql",
-    "typescript",
-    "jquery",
-    "jest",
-  ];
+interface TechInputSelectProps {
+  setNewTech: (newTech: string) => void;
+}
 
+const TechInputSelect = ({ setNewTech }: TechInputSelectProps) => {
   const [toggle, setToggle] = useState(false);
-  const [filteredTechs, setFilteredTechs] = useState([]);
-  const [userInput, setUserInput] = useState("");
+  const [filteredTechs, setFilteredTechs] = useState<Array<string>>([]);
+  const [userInput, setUserInput] = useState<string>("");
 
   useEffect(() => {
     let userSearch = validTechs.filter((item) => item.includes(userInput));
     setFilteredTechs(userSearch);
-    // eslint-disable-next-line
   }, [userInput]);
 
-  const addTech = (value) => {
+  const addTech = (value: string) => {
     setNewTech(value);
     setUserInput("");
     setToggle(!toggle);

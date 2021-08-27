@@ -5,11 +5,18 @@ import { useState } from "react";
 import TechInputSelect from "../TechInputSelect";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useUserData } from "../../providers/userData";
 
-const TechModal = ({ setTechModalToggle, setUserTechs, userTechs }) => {
-  const [newTech, setNewTech] = useState("");
+interface TechModalProps {
+  setTechModalToggle: (toggle: boolean) => void;
+}
 
-  const handleSubmit = (event) => {
+const TechModal = ({ setTechModalToggle }: TechModalProps) => {
+  const { userTechs, setUserTechs, getUserData } = useUserData();
+
+  const [newTech, setNewTech] = useState<string>();
+
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     let body = {
       title: newTech,
@@ -24,11 +31,12 @@ const TechModal = ({ setTechModalToggle, setUserTechs, userTechs }) => {
         },
       })
       .then(() => {
-        setUserTechs(newTech);
+        setUserTechs([...userTechs, newTech]);
+        getUserData();
         toast.success("Tecnologia adicionada");
       })
       .catch(() =>
-        toast.error("Essa tecnologia já foi adicionada", { duration: 2000 })
+        toast.error("Ops, algo de errado aconteceu!", { duration: 2000 })
       );
 
     setTechModalToggle(false);
@@ -40,14 +48,10 @@ const TechModal = ({ setTechModalToggle, setUserTechs, userTechs }) => {
         <div className="form-box">
           <form onSubmit={(event) => handleSubmit(event)}>
             <label>Escolha uma tecnologia</label>
-            <TechInputSelect
-              userTechs={userTechs}
-              newTech={newTech}
-              setNewTech={setNewTech}
-            />
+            <TechInputSelect setNewTech={setNewTech} />
 
             <div className="my-techs">
-              {newTech.trim() !== "" && (
+              {newTech?.trim() !== "" && (
                 <>
                   <TechIcon tech={newTech} />
                   <div className="checkbox">
@@ -60,7 +64,7 @@ const TechModal = ({ setTechModalToggle, setUserTechs, userTechs }) => {
               )}
             </div>
 
-            <button disabled={newTech.length === 0}>Enviar</button>
+            <button disabled={newTech?.length === 0}>Enviar</button>
           </form>
         </div>
       </TechModalBox>

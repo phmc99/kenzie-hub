@@ -1,19 +1,14 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 import Home from "../pages/Home";
-import SignUp from "../pages/SignUp";
-import SignIn from "../pages/SignIn";
+import SignUpPage from "../pages/SignUp";
+import SignInPage from "../pages/SignIn";
 import Dashboard from "../pages/Dashboard";
+import { useAuth } from "../providers/auth";
 
 const Routes = () => {
-  const [isLogged, setIsLogged] = useState(false);
-
-  useEffect(() => {
-    localStorage.getItem("@kenziehub:token");
-    setIsLogged(true);
-  }, []);
+  const { isLogged } = useAuth();
 
   return (
     <Switch>
@@ -21,10 +16,10 @@ const Routes = () => {
         <Home />
       </Route>
       <Route path="/login">
-        <SignIn />
+        <SignInPage />
       </Route>
       <Route path="/register">
-        <SignUp />
+        <SignUpPage />
       </Route>
       {isLogged ? (
         <Route path="/dashboard/:id">

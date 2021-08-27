@@ -1,4 +1,3 @@
-import React from "react";
 import { useHistory } from "react-router-dom";
 import AsideImg from "../../components/AsideImage";
 import { MainContent } from "./style";
