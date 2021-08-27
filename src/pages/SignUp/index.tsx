@@ -1,5 +1,3 @@
-import React from "react";
-
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,8 +11,10 @@ import toast, { Toaster } from "react-hot-toast";
 import AsideImg from "../../components/AsideImage";
 import { FormBox } from "../../components/FormBox/style";
 import { MainContent, InputBox, ButtonContent } from "./style";
+import { SignUp } from "../../types";
+import { SubmitHandler } from "react-hook-form";
 
-const SignUp = () => {
+const SignUpPage = () => {
   const history = useHistory();
 
   const formSchema = yup.object().shape({
@@ -41,12 +41,12 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<SignUp>({
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit = (data) => {
-    axios
+  const onSubmit: SubmitHandler<SignUp> = async (data) => {
+    await axios
       .post("https://kenziehub.me/users", data)
       .then(() => {
         reset();
@@ -145,4 +145,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

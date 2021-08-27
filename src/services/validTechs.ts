@@ -1,4 +1,4 @@
-export const validTechs = [
+export const validTechs: Array<string> = [
   "reactjs",
   "python",
   "node",

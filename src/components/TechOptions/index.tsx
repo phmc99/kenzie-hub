@@ -6,30 +6,33 @@ import { TechIcon } from "../TechIcon/TechIcon";
 import { TechOtionsContent } from "./style";
 
 import { HiTrash } from "react-icons/hi";
+import { useUserData } from "../../providers/userData";
 
-const TechOptions = ({
-  title,
-  id,
-  status,
-  updateTechs,
-  setUserTechs,
-  setTechOptionModalToggle,
-}) => {
+interface TechOptionsProps {
+  id: string | undefined;
+  setTechOptionModalToggle: (toggle: boolean) => void;
+}
+
+const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
   const token = localStorage.getItem("@kenziehub:token");
-  const [techStatus, setTechStatus] = useState(status);
 
-  const handleDeleteTech = () => {
-    axios
+  const { userTechs, setUserTechs } = useUserData();
+  const selectedTech = userTechs.find((item) => item.id === id);
+
+  const [techStatus, setTechStatus] = useState<string>("");
+
+  const handleDeleteTech = async () => {
+    await axios
       .delete(`https://kenziehub.me/users/techs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
-        setUserTechs(updateTechs.find((item) => item.id === id));
+        setUserTechs(userTechs.filter((item) => item.id !== id));
       });
     setTechOptionModalToggle(false);
-    toast(`Tecnologia ${title} deletada`, {
+    toast(`Tecnologia ${selectedTech?.title} deletada`, {
       icon: "🗑",
     });
   };
@@ -47,14 +50,14 @@ const TechOptions = ({
       })
       .then(() => {
         setUserTechs(
-          updateTechs.map((item) => {
+          userTechs.map((item) => {
             if (item.id === id) {
               return (item.status = techStatus);
             }
             return item;
           })
         );
-        toast(`Tecnologia ${title} atualizada`, {
+        toast(`Tecnologia ${selectedTech?.title} atualizada`, {
           icon: "🔃",
         });
       })
@@ -67,7 +70,7 @@ const TechOptions = ({
     <Modal title="Atualize ou delete" setModalToggle={setTechOptionModalToggle}>
       <TechOtionsContent>
         <div className="icon-select">
-          <TechIcon tech={title} />
+          <TechIcon tech={selectedTech?.title} />
           <select onChange={(event) => setTechStatus(event.target.value)}>
             <option value="Selecione" disabled selected>
               Seleciona o status
