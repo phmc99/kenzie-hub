@@ -4,7 +4,7 @@ export const ModalBackground = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: rgb(0, 0, 0, 0.85);
-  position: absolute;
+  position: fixed;
   z-index: 1;
 
   .modal-main {
@@ -12,6 +12,7 @@ export const ModalBackground = styled.div`
     overflow: hidden;
 
     padding: 10px;
+    min-height: 270px;
     width: 300px;
     background-color: var(--black-pastel);
 

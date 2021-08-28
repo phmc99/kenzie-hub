@@ -17,8 +17,9 @@ interface AuthProviderData {
 const AuthContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const tokenStorage = localStorage.getItem("@kenziehub:token");
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const [token, setToken] = useState<string>("");
+  const [token, setToken] = useState<string>(tokenStorage || "");
   const [userId, setUserId] = useState<string>("");
 
   const handleLogin = async (data: SignIn) => {

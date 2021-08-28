@@ -14,6 +14,9 @@ import TechModal from "../../components/TechModal";
 import TechOptions from "../../components/TechOptions";
 import { useUserData } from "../../providers/userData";
 import { TechProps } from "../../types";
+import WorkContainer from "../../components/WorkContainer";
+import WorkModal from "../../components/WorkModal";
+import WorkOptions from "../../components/WorkOptions";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -21,16 +24,25 @@ const Dashboard = () => {
   const { userData, userTechs } = useUserData();
 
   const [techModalToggle, setTechModalToggle] = useState<boolean>(false);
+  const [workModalToggle, setWorkModalToggle] = useState<boolean>(false);
+  const [workModalOptionsToggle, setWorkModalOptionsToggle] =
+    useState<boolean>(false);
   const [techOptionModalToggle, setTechOptionModalToggle] =
     useState<boolean>(false);
 
   const [selectedTech, setSelectedTech] = useState<TechProps>();
+  const [selectedWork, setSelectedWork] = useState<string>();
 
   const openTechModal = () => setTechModalToggle(true);
+  const openWorkModal = () => setWorkModalToggle(true);
 
   const openTechOptionModal = (value: TechProps) => {
     setTechOptionModalToggle(true);
     setSelectedTech(value);
+  };
+  const openWorkOptionsModal = (value: string) => {
+    setWorkModalOptionsToggle(true);
+    setSelectedWork(value);
   };
 
   const handleLogout = () => {
@@ -44,6 +56,13 @@ const Dashboard = () => {
   return (
     <>
       {techModalToggle && <TechModal setTechModalToggle={setTechModalToggle} />}
+      {workModalToggle && <WorkModal setWorkModalToggle={setWorkModalToggle} />}
+      {workModalOptionsToggle && (
+        <WorkOptions
+          id={selectedWork}
+          setWorkModalOptionsToggle={setWorkModalOptionsToggle}
+        />
+      )}
       {techOptionModalToggle && (
         <TechOptions
           id={selectedTech?.id}
@@ -63,7 +82,7 @@ const Dashboard = () => {
               <img src={profileImg} alt="" />
             </div>
             <h1>{userData?.name}</h1>
-            <span>Modulo: {userData?.course_module}</span>
+            <span className="module">Modulo: {userData?.course_module}</span>
           </div>
 
           <div className="column">
@@ -73,7 +92,7 @@ const Dashboard = () => {
               </div>
 
               <p>{userData?.bio}</p>
-              <span>
+              <span className="contact">
                 <b>Contato</b> - {userData?.contact}
               </span>
             </InfoBox>
@@ -102,6 +121,15 @@ const Dashboard = () => {
                   openTechOptionModal={openTechOptionModal}
                 />
               </div>
+            </InfoBox>
+            <InfoBox>
+              <div className="title">
+                <h2>Projetos</h2>
+                <button onClick={openWorkModal}>
+                  <HiPencilAlt />
+                </button>
+              </div>
+              <WorkContainer setModalOptions={openWorkOptionsModal} />
             </InfoBox>
           </div>
         </section>

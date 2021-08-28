@@ -14,8 +14,8 @@ export const MainContent = styled.main`
 
     button {
       margin: 10px;
-      font-size: 14px;
-      width: 85px;
+      font-size: 10px;
+      width: 65px;
       height: 35px;
       background-color: #73685952;
       color: var(--black-pastel);
@@ -28,12 +28,17 @@ export const MainContent = styled.main`
       &:hover {
         filter: brightness(0.55);
       }
+
+      @media (min-width: 768px) {
+        width: 85px;
+        font-size: 14px;
+      }
     }
   }
 
   .content {
     position: absolute;
-    top: 55%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -67,7 +72,7 @@ export const MainContent = styled.main`
         color: var(--white-pastel);
         font-size: 18px;
       }
-      span {
+      .module {
         color: gray;
         word-wrap: break-word;
       }
@@ -77,7 +82,7 @@ export const MainContent = styled.main`
       display: flex;
       flex-direction: column;
 
-      span {
+      .contact {
         color: gray;
         font-size: 12px;
       }
