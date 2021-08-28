@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const TechIcon = styled.div`
+interface TechIconProps {
+  tech?: string;
+}
+
+export const TechIcon = styled.div<TechIconProps>`
   width: 50px;
   height: 50px;
 

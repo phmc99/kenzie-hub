@@ -59,7 +59,6 @@ export const GlobalStyle = createGlobalStyle`
     height: 50px;
     font-size: 24px;
     border-radius: 10px;
-    width: 180px;
     outline: none;
 
 

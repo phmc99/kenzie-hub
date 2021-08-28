@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 
-export const FormBox = styled.div`
+interface FormBoxProps {
+  login?: boolean;
+}
+
+export const FormBox = styled.div<FormBoxProps>`
   background-color: #efd4cb80;
   width: 300px;
   padding: 20px;
@@ -9,7 +13,7 @@ export const FormBox = styled.div`
   ${(props) =>
     props.login
       ? css`
-          height: 300px;
+          height: 330px;
         `
       : css`
           height: 500px;
@@ -29,8 +33,14 @@ export const FormBox = styled.div`
 
     button {
       font-size: 18px;
-      width: 120px;
-      align-self: flex-end;
+      ${(props) =>
+        props.login
+          ? css`
+              width: 100%;
+            `
+          : css`
+              width: 120px;
+            `}
     }
   }
 
@@ -61,7 +71,6 @@ export const FormBox = styled.div`
       height: 450px;
       button {
         width: 180px;
-        font-size: 20px;
       }
     }
   }
