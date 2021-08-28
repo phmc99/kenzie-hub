@@ -64,7 +64,7 @@ const TechModal = ({ setTechModalToggle }: TechModalProps) => {
               )}
             </div>
 
-            <button disabled={newTech?.length === 0}>Enviar</button>
+            <button disabled={newTech?.length === 0}>Cadastrar</button>
           </form>
         </div>
       </TechModalBox>
