@@ -71,8 +71,11 @@ const SignInPage = () => {
                 </span>
               </InputBox>
               <ButtonContent>
-                <Link to="/register">Cadastre-se aqui</Link>
                 <button type="submit">Entrar</button>
+                <p>
+                  Quer fazer parte da plataforma?{" "}
+                  <Link to="/register">Cadastre-se aqui</Link>
+                </p>
               </ButtonContent>
             </form>
           </FormBox>

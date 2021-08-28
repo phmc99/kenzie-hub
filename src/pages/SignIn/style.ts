@@ -59,15 +59,20 @@ export const InputBox = styled.div`
 export const ButtonContent = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 5px;
+
+  p {
+    text-align: center;
+  }
 
   a {
     color: var(--orange-aux);
   }
 
   @media (min-width: 800px) {
-    margin-top: 20px;
+    margin: 10px 0;
     a {
       font-size: 16px;
     }
