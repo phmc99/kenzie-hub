@@ -8,7 +8,7 @@ import {
 
 import axios from "axios";
 import toast from "react-hot-toast";
-import { TechProps } from "../../types";
+import { TechProps, WorkProps } from "../../types";
 import { useAuth } from "../auth";
 
 interface UserData {
@@ -27,7 +27,9 @@ interface UserProviderProps {
 interface UserProviderData {
   userData?: UserData;
   userTechs: TechProps[];
+  userWorks: WorkProps[];
   setUserTechs: (techs: any) => void;
+  setUserWorks: (works: any) => void;
   getUserData: () => void;
 }
 
@@ -36,6 +38,7 @@ const UserDataContext = createContext<UserProviderData>({} as UserProviderData);
 export const UserDataProvider = ({ children }: UserProviderProps) => {
   const [userData, setUserData] = useState<UserData>();
   const [userTechs, setUserTechs] = useState<TechProps[]>([]);
+  const [userWorks, setUserWorks] = useState<WorkProps[]>([]);
 
   const { userId } = useAuth();
 
@@ -46,6 +49,7 @@ export const UserDataProvider = ({ children }: UserProviderProps) => {
         .then((response) => {
           setUserData(response.data);
           setUserTechs(response.data.techs);
+          setUserWorks(response.data.works);
         })
         .catch(() => toast.error("Ops, algo de errado aconteceu"));
     }
@@ -57,7 +61,14 @@ export const UserDataProvider = ({ children }: UserProviderProps) => {
 
   return (
     <UserDataContext.Provider
-      value={{ userData, userTechs, setUserTechs, getUserData }}
+      value={{
+        userData,
+        userTechs,
+        setUserTechs,
+        getUserData,
+        userWorks,
+        setUserWorks,
+      }}
     >
       {children}
     </UserDataContext.Provider>

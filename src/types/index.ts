@@ -17,3 +17,10 @@ export interface TechProps {
   title: string;
   status: string;
 }
+
+export interface WorkProps {
+  id?: string;
+  title?: string;
+  description?: string;
+  deploy_url?: string;
+}
