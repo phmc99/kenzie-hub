@@ -16,7 +16,7 @@ interface TechOptionsProps {
 const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
   const token = localStorage.getItem("@kenziehub:token");
 
-  const { userTechs, setUserTechs } = useUserData();
+  const { userTechs, setUserTechs, getUserData } = useUserData();
   const selectedTech = userTechs.find((item) => item.id === id);
 
   const [techStatus, setTechStatus] = useState<string>("");
@@ -35,6 +35,9 @@ const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
     toast(`Tecnologia ${selectedTech?.title} deletada`, {
       icon: "🗑",
     });
+
+    getUserData();
+    setTechOptionModalToggle(false);
   };
 
   const handleUpdateTech = () => {
@@ -62,6 +65,8 @@ const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
         });
       })
       .catch(() => toast.error("Altere o status da tecnologia"));
+
+    getUserData();
 
     setTechOptionModalToggle(false);
   };
