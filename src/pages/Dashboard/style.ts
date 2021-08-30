@@ -54,8 +54,9 @@ export const MainContent = styled.main`
       flex-direction: column;
       align-items: center;
       width: 150px;
-      max-height: 200px;
+      max-height: 240px;
       overflow: hidden;
+      text-align: center;
       .avatar-circle {
         padding: 5px;
         background-color: var(--pink-pastel);

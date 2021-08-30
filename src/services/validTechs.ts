@@ -17,4 +17,7 @@ export const validTechs: Array<string> = [
   "javascript",
   "swift",
   "ruby",
+  "html5",
+  "css3",
+  "typescript",
 ];

@@ -81,7 +81,7 @@ const Dashboard = () => {
             <div className="avatar-circle">
               <img src={profileImg} alt="" />
             </div>
-            <h1>{userData?.name}</h1>
+            <h1>{userData?.name.split(" ")[0]}</h1>
             <span className="module">Modulo: {userData?.course_module}</span>
           </div>
 
