@@ -36,7 +36,6 @@ const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
       icon: "🗑",
     });
 
-    getUserData();
     setTechOptionModalToggle(false);
   };
 
@@ -52,21 +51,12 @@ const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
         },
       })
       .then(() => {
-        setUserTechs(
-          userTechs.map((item) => {
-            if (item.id === id) {
-              return (item.status = techStatus);
-            }
-            return item;
-          })
-        );
+        getUserData();
         toast(`Tecnologia ${selectedTech?.title} atualizada`, {
           icon: "🔃",
         });
       })
       .catch(() => toast.error("Altere o status da tecnologia"));
-
-    getUserData();
 
     setTechOptionModalToggle(false);
   };
