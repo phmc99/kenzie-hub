@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "../Modal";
@@ -7,6 +6,7 @@ import { TechOtionsContent } from "./style";
 
 import { HiTrash } from "react-icons/hi";
 import { useUserData } from "../../providers/userData";
+import { api } from "../../services/api";
 
 interface TechOptionsProps {
   id: string | undefined;
@@ -22,8 +22,8 @@ const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
   const [techStatus, setTechStatus] = useState<string>("");
 
   const handleDeleteTech = async () => {
-    await axios
-      .delete(`https://kenziehub.me/users/techs/${id}`, {
+    await api
+      .delete(`users/techs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -44,8 +44,8 @@ const TechOptions = ({ id, setTechOptionModalToggle }: TechOptionsProps) => {
       status: techStatus,
     };
 
-    axios
-      .put(`https://kenziehub.me/users/techs/${id}`, body, {
+    api
+      .put(`users/techs/${id}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

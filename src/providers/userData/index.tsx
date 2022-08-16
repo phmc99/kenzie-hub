@@ -6,10 +6,10 @@ import {
   useState,
 } from "react";
 
-import axios from "axios";
 import toast from "react-hot-toast";
 import { TechProps, WorkProps } from "../../types";
 import { useAuth } from "../auth";
+import { api } from "../../services/api";
 
 interface UserData {
   id: string;
@@ -44,8 +44,8 @@ export const UserDataProvider = ({ children }: UserProviderProps) => {
 
   const getUserData = async () => {
     if (userId) {
-      await axios
-        .get(`https://kenziehub.me/users/${userId}`)
+      await api
+        .get(`users/${userId}`)
         .then((response) => {
           setUserData(response.data);
           setUserTechs(response.data.techs);

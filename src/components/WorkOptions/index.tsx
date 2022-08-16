@@ -1,4 +1,3 @@
-import axios from "axios";
 import toast from "react-hot-toast";
 import Modal from "../Modal";
 import { ModalWorkBox } from "../WorkModal/style";
@@ -7,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserData } from "../../providers/userData";
 import { HiTrash } from "react-icons/hi";
+import { api } from "../../services/api";
 
 interface WorkModalOptionsProps {
   setWorkModalOptionsToggle: (toggle: boolean) => void;
@@ -37,8 +37,8 @@ const WorkOptions = ({
   });
 
   const onSubmit: SubmitHandler<WorkUpdate> = (data) => {
-    axios
-      .put(`https://kenziehub.me/users/works/${id}`, data, {
+    api
+      .put(`users/works/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,8 +58,8 @@ const WorkOptions = ({
   };
 
   const deleteWork = () => {
-    axios
-      .delete(`https://kenziehub.me/users/works/${id}`, {
+    api
+      .delete(`users/works/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -85,15 +85,30 @@ const WorkOptions = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-box">
             <label>Titulo</label>
-            <input type="text" {...register("title")} />
+            <input
+              type="text"
+              required
+              {...register("title")}
+              placeholder="Novo titulo ou deixe em branco para manter"
+            />
           </div>
           <div className="input-box">
             <label>Descrição</label>
-            <input type="text" {...register("description")} />
+            <input
+              type="text"
+              required
+              {...register("description")}
+              placeholder="Nova descrição ou deixe em branco para manter"
+            />
           </div>
           <div className="input-box">
             <label>URL do projeto</label>
-            <input type="text" {...register("deploy_url")} />
+            <input
+              type="text"
+              required
+              {...register("deploy_url")}
+              placeholder="Nova URL ou deixe em branco para manter"
+            />
           </div>
           <button type="submit">Atualizar</button>
         </form>

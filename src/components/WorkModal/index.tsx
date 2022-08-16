@@ -4,9 +4,9 @@ import { ModalWorkBox } from "./style";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useUserData } from "../../providers/userData";
+import { api } from "../../services/api";
 
 interface WorkModalProps {
   setWorkModalToggle: (toggle: boolean) => void;
@@ -34,8 +34,8 @@ const WorkModal = ({ setWorkModalToggle }: WorkModalProps) => {
   const onSubmit: SubmitHandler<WorkCreate> = (data) => {
     const token = localStorage.getItem("@kenziehub:token");
 
-    axios
-      .post("https://kenziehub.me/users/works", data, {
+    api
+      .post("users/works", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,15 +58,15 @@ const WorkModal = ({ setWorkModalToggle }: WorkModalProps) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="input-box">
             <label>Titulo</label>
-            <input type="text" required {...register("title")} />
+            <input type="text" required {...register("title")} placeholder="Digite o nome do projeto" />
           </div>
           <div className="input-box">
             <label>Descrição</label>
-            <input type="text" required {...register("description")} />
+            <input type="text" required {...register("description")} placeholder="Digite uma breve descrição"/>
           </div>
           <div className="input-box">
             <label>URL do projeto</label>
-            <input type="text" required {...register("deploy_url")} />
+            <input type="text" required {...register("deploy_url")} placeholder="Digite uma URL do projeto" />
           </div>
           <button type="submit">Cadastrar</button>
         </form>

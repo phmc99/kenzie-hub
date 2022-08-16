@@ -6,9 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import AsideImg from "../../components/AsideImage";
 import { FormBox } from "../../components/FormBox/style";
-import { MainContent, InputBox, ButtonContent } from "./style";
 import { SignIn } from "../../types";
 import { useAuth } from "../../providers/auth";
+import { InputBox } from "../../components/InputBox/style";
+import { ButtonContent } from "../../components/ButtonContent/style";
+import { MainContent } from "../../components/MainContent/style";
 
 const SignInPage = () => {
   const { handleLogin } = useAuth();
@@ -54,6 +56,7 @@ const SignInPage = () => {
                   {...register("email")}
                   className={errors.email && "input-error"}
                   type="email"
+                  placeholder="Digite seu e-mail"
                 />
                 <span className={errors.email && "showError"}>
                   {errors.email?.message}
@@ -65,15 +68,15 @@ const SignInPage = () => {
                   {...register("password")}
                   className={errors.password && "input-error"}
                   type="password"
+                  placeholder="Digite sua senha"
                 />
                 <span className={errors.password && "showError"}>
                   {errors.password?.message}
                 </span>
               </InputBox>
-              <ButtonContent>
+              <ButtonContent column={true}>
                 <button type="submit">Entrar</button>
                 <p>
-                  Quer fazer parte da plataforma?{" "}
                   <Link to="/register">Cadastre-se aqui</Link>
                 </p>
               </ButtonContent>

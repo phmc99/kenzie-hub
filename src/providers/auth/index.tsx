@@ -1,6 +1,6 @@
-import axios from "axios";
 import { createContext, ReactNode, useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { api } from "../../services/api";
 import { SignIn } from "../../types";
 
 interface AuthProviderProps {
@@ -23,8 +23,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [userId, setUserId] = useState<string>("");
 
   const handleLogin = async (data: SignIn) => {
-    await axios
-      .post("https://kenziehub.me/sessions", data)
+    await api
+      .post("sessions", data)
       .then((response) => {
         setToken(response.data.token);
         setIsLogged(true);

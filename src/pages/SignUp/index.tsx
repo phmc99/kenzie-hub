@@ -2,17 +2,18 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import axios from "axios";
-
 import { Link, useHistory } from "react-router-dom";
 
 import toast, { Toaster } from "react-hot-toast";
 
 import AsideImg from "../../components/AsideImage";
 import { FormBox } from "../../components/FormBox/style";
-import { MainContent, InputBox, ButtonContent } from "./style";
 import { SignUp } from "../../types";
 import { SubmitHandler } from "react-hook-form";
+import { api } from "../../services/api";
+import { InputBox } from "../../components/InputBox/style";
+import { ButtonContent } from "../../components/ButtonContent/style";
+import { MainContent } from "../../components/MainContent/style";
 
 const SignUpPage = () => {
   const history = useHistory();
@@ -46,8 +47,8 @@ const SignUpPage = () => {
   });
 
   const onSubmit: SubmitHandler<SignUp> = async (data) => {
-    await axios
-      .post("https://kenziehub.me/users", data)
+    await api
+      .post("users", data)
       .then(() => {
         reset();
         toast.success("Bem-vindx ao Kenzie Hub!");
@@ -73,6 +74,7 @@ const SignUpPage = () => {
                   {...register("name")}
                   className={errors.name && "input-error"}
                   type="text"
+                  placeholder="Digite seu nome"
                 />
                 <span className={errors.name && "showError"}>
                   {errors.name?.message}
@@ -84,6 +86,7 @@ const SignUpPage = () => {
                   {...register("email")}
                   className={errors.email && "input-error"}
                   type="email"
+                  placeholder="Digite seu e-mail"
                 />
                 <span className={errors.email && "showError"}>
                   {errors.email?.message}
@@ -95,6 +98,8 @@ const SignUpPage = () => {
                   {...register("password")}
                   className={errors.password && "input-error"}
                   type="password"
+                  autoComplete="new-password"
+                  placeholder="Digite uma senha"
                 />
                 <span className={errors.password && "showError"}>
                   {errors.password?.message}
@@ -106,6 +111,7 @@ const SignUpPage = () => {
                   {...register("contact")}
                   className={errors.contact && "input-error"}
                   type="text"
+                  placeholder="Digite uma forma de contato"
                 />
                 <span className={errors.contact && "showError"}>
                   {errors.contact?.message}
@@ -117,6 +123,7 @@ const SignUpPage = () => {
                   {...register("bio")}
                   className={errors.bio && "input-error"}
                   type="text"
+                  placeholder="Digite uma breve descrição sobre você"
                 />
                 <span className={errors.bio && "showError"}>
                   {errors.bio?.message}
@@ -128,6 +135,7 @@ const SignUpPage = () => {
                   {...register("course_module")}
                   className={errors.course_module && "input-error"}
                   type="text"
+                  placeholder="Digite seu módulo no curso (Ex: Concluido, M4)"
                 />
                 <span className={errors.course_module && "showError"}>
                   {errors.course_module?.message}

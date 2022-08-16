@@ -3,9 +3,9 @@ import { TechIcon } from "../TechIcon/TechIcon";
 import { TechModalBox } from "./style";
 import { useState } from "react";
 import TechInputSelect from "../TechInputSelect";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useUserData } from "../../providers/userData";
+import { api } from "../../services/api";
 
 interface TechModalProps {
   setTechModalToggle: (toggle: boolean) => void;
@@ -14,18 +14,24 @@ interface TechModalProps {
 const TechModal = ({ setTechModalToggle }: TechModalProps) => {
   const { userTechs, setUserTechs, getUserData } = useUserData();
 
-  const [newTech, setNewTech] = useState<string>();
+  const [newTech, setNewTech] = useState<string>("");
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+
     let body = {
       title: newTech,
       status: event.target[1].value,
     };
+
+    if (body.title?.trim() === "") {
+      return toast.error("Selecione uma tecnologia");
+    }
+
     const token = localStorage.getItem("@kenziehub:token");
 
-    axios
-      .post("https://kenziehub.me/users/techs", body, {
+    api
+      .post("users/techs", body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

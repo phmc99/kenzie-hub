@@ -21,7 +21,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Heebo', sans-serif;
     
     list-style: none;
-
     
   }
 
