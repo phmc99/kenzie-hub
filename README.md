@@ -14,7 +14,7 @@
 - [x] Segurança de rotas
 
 <h1 align="center">
-  <a href="https://kenzie-hub-sooty.vercel.app/">Link para o projeto</a>
+  <a href="https://kenzie-hub-project-two.vercel.app/">Link para o projeto</a>
 </h1>
 
 ### 🛠 Tecnologias
