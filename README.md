@@ -3,7 +3,7 @@
 <h1 align="center">Uma rede onde programadores podem cadastrar seus portfólios.</h1>
 
 <h4 align="center"> 
-	🚀 Projeto finalizado. 🚀
+	<a href="https://www.linkedin.com/posts/phmc99_reactjs-frontend-uidesign-activity-6838170320151556096-bXe3?utm_source=share&utm_medium=member_desktop" target="_blank">Apresentação em vídeo</a>
 </h4>
 
 ### Features
@@ -14,7 +14,7 @@
 - [x] Segurança de rotas
 
 <h1 align="center">
-  <a href="https://kenzie-hub-project-two.vercel.app/">Link para o projeto</a>
+  <a href="https://kenzie-hub-project-two.vercel.app/" target="_blank">Link para o projeto</a>
 </h1>
 
 ### 🛠 Tecnologias
